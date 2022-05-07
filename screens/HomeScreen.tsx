@@ -3,12 +3,15 @@ import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import data from "../data.json";
 import { Workout } from "../types/data";
 import WorkoutItem from "../components/WorkoutItem";
+import React from "react";
+import { RobotoFlex } from "../components/styled/RobotoFlex";
 
 export default function HomeScreen({navigation}: NativeStackHeaderProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>New Workouts</Text>
+       <Text style={styles.header}>New Workouts</Text>
+      <RobotoFlex style={{fontSize: 20}}>Choose workout </RobotoFlex>
       <FlatList
         data={data as Workout[]}
         renderItem={WorkoutItem}
@@ -26,6 +29,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     marginBottom: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   }
 })
