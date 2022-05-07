@@ -1,20 +1,27 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import data from "../data.json";
 import { Workout } from "../types/data";
 import WorkoutItem from "../components/WorkoutItem";
-import React from "react";
-import { RobotoFlex } from "../components/styled/RobotoFlex";
 
 export default function HomeScreen({navigation}: NativeStackHeaderProps) {
 
   return (
     <View style={styles.container}>
-       <Text style={styles.header}>New Workouts</Text>
-      <RobotoFlex style={{fontSize: 20}}>Choose workout </RobotoFlex>
+      <Text style={styles.header}>New Workouts</Text>
       <FlatList
         data={data as Workout[]}
-        renderItem={WorkoutItem}
+        renderItem={({item}) => {
+          return (
+            <Pressable
+              onPress={() => navigation.navigate("WorkoutDetail")}
+            >
+              <WorkoutItem
+                item={item}
+              />
+            </Pressable>
+          )
+        }}
         keyExtractor={item => item.slug}
       />
     </View>
@@ -29,6 +36,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     marginBottom: 20,
-    fontWeight: "bold",
+    fontWeight: "bold"
   }
 })
